@@ -26,11 +26,13 @@
     "type": "git",
     "url": "https://github.com/aadebdeb/three-raymarch.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/three": "^0.133.1"
+  },
   "devDependencies": {
     "@purtuga/esm-webpack-plugin": "^1.2.0",
     "gh-pages": "^2.1.1",
-    "three": "^0.111.0",
+    "three": "^0.133.1",
     "ts-loader": "^6.2.1",
     "typedoc": "^0.15.3",
     "typescript": "^3.7.2",

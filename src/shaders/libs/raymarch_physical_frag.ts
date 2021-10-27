@@ -24,6 +24,7 @@ uniform float roughness;
 #include <common>
 #include <packing>
 #include <bsdfs>
+#include <normal_pars_fragment>
 #include <lights_pars_begin>
 #include <lights_physical_pars_fragment>
 #include <shadowmap_pars_fragment>
@@ -57,6 +58,7 @@ void main(void) {
     float clearcoatRoughness = physicalMaterial.clearcoatRoughness;
   #endif
 
+  vec3 geometryNormal = normal;
   #include <lights_physical_fragment>
   #include <lights_fragment_begin>
   #include <lights_fragment_end>

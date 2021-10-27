@@ -52,6 +52,7 @@ export abstract class ObjectSpaceRaymarchMaterial extends ShaderMaterial {
     if (distanceScale <= 0.0) {
       throw new Error('ObjectSpaceRaymarchMaterial: distanceScale must be bigger than 0.');
     }
+    console.log(RaymarchShaderChunk.raymarch_vert)
     super({
       vertexShader: RaymarchShaderChunk.raymarch_vert,
       fragmentShader: resolveIncludes(fragmentShader, overrideChunks),

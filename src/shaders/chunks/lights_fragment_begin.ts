@@ -15,7 +15,7 @@ PointLight pointLight;
 #pragma unroll_loop
 for ( int i = 0; i < NUM_POINT_LIGHTS; i ++ ) {
   pointLight = pointLights[ i ];
-  getPointDirectLightIrradiance(pointLight, geometry, directLight);
+  getPointLightInfo(pointLight, geometry, directLight);
   #if defined( USE_SHADOWMAP ) && ( UNROLLED_LOOP_INDEX < NUM_POINT_LIGHT_SHADOWS)
   directLight.color *= all(bvec3( pointLight.shadow, directLight.visible, receiveShadow)) ? getPointShadow(pointShadowMap[ i ], pointLight.shadowMapSize, pointLight.shadowBias, pointLight.shadowRadius, vPointShadowCoord[ i ], pointLight.shadowCameraNear, pointLight.shadowCameraFar) : 1.0;
   #endif
@@ -42,7 +42,7 @@ DirectionalLight directionalLight;
 #pragma unroll_loop
 for ( int i = 0; i < NUM_DIR_LIGHTS; i ++ ) {
   directionalLight = directionalLights[ i ];
-  getDirectionalDirectLightIrradiance( directionalLight, geometry, directLight );
+  getDirectionalLightInfo( directionalLight, geometry, directLight );
   #if defined( USE_SHADOWMAP ) && ( UNROLLED_LOOP_INDEX < NUM_DIR_LIGHT_SHADOWS )
   directLight.color *= all( bvec3( directionalLight.shadow, directLight.visible, receiveShadow ) ) ? getShadow( directionalShadowMap[ i ], directionalLight.shadowMapSize, directionalLight.shadowBias, directionalLight.shadowRadius, vDirectionalShadowCoord[ i ] ) : 1.0;
   #endif
@@ -63,7 +63,7 @@ for ( int i = 0; i < NUM_RECT_AREA_LIGHTS; i ++ ) {
 #if defined( RE_IndirectDiffuse )
 vec3 iblIrradiance = vec3(0.0);
 vec3 irradiance = getAmbientLightIrradiance(ambientLightColor);
-irradiance += getLightProbeIrradiance(lightProbe, geometry);
+irradiance += getLightProbeIrradiance(lightProbe, geometry.normal);
 #if (NUM_HEMI_LIGHTS > 0)
 #pragma unroll_loop
 for ( int i = 0; i < NUM_HEMI_LIGHTS; i ++ ) {
