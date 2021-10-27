@@ -6,6 +6,7 @@ varying vec3 vPosition;
 varying vec3 vRaymarchNormal;
 
 uniform vec3 size;
+uniform float time;
 
 #include <shadowmap_pars_vertex>
 

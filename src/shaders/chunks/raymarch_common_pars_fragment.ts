@@ -15,6 +15,7 @@ uniform vec3 size;
 uniform float hitDistance;
 uniform float differentiateDistance;
 uniform float distanceScale;
+uniform float time;
 
 mat4 invertModelMatrix(mat4 matrix) {
   // matrix must not include scale

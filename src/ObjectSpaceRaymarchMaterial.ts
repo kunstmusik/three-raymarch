@@ -30,6 +30,7 @@ export interface ObjectSpaceRaymarchMaterialParameters {
   /** Arbitary defines */
   defines?: {[define: string]: any},
   opacity?: number,
+  time?: number,
 }
 
 /**
@@ -46,13 +47,13 @@ export abstract class ObjectSpaceRaymarchMaterial extends ShaderMaterial {
       differentiateDistance = 0.001,
       distanceScale = 1.0,
       opacity = 1.0,
+      time = 0.0,
       uniforms = {},
       defines = {},
     }: ObjectSpaceRaymarchMaterialParameters = {}) {
     if (distanceScale <= 0.0) {
       throw new Error('ObjectSpaceRaymarchMaterial: distanceScale must be bigger than 0.');
     }
-    console.log(RaymarchShaderChunk.raymarch_vert)
     super({
       vertexShader: RaymarchShaderChunk.raymarch_vert,
       fragmentShader: resolveIncludes(fragmentShader, overrideChunks),
@@ -64,6 +65,7 @@ export abstract class ObjectSpaceRaymarchMaterial extends ShaderMaterial {
           'differentiateDistance': { value: differentiateDistance },
           'distanceScale': { value: distanceScale },
           'size': { value: size },
+          'time': { value: time},
         }
       ]),
       defines: Object.assign(
@@ -134,6 +136,16 @@ export abstract class ObjectSpaceRaymarchMaterial extends ShaderMaterial {
     if (this.uniforms) {
       this.uniforms['opacity'].value = opacity;
     }
+  }
+
+  set time(time: number) {
+    if (this.uniforms) {
+      this.uniforms['time'].value = time;
+    }
+  }
+
+  get time():number {
+    return this.uniforms['time'].value;
   }
 
 }
