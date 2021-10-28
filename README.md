@@ -1,6 +1,9 @@
 # three-raymarch
 
-Raymarching Plugin for three.js
+Raymarching Plugin for three.js. Forked from https://github.com/aadebdeb/three-raymarch by aadebdeb. 
+
+* Updated for three.js 0.133.1
+* Added time uniform
 
 ## Install
 
