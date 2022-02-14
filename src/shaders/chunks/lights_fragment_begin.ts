@@ -12,7 +12,7 @@ IncidentLight directLight;
 
 #if (NUM_POINT_LIGHTS > 0) && defined(RE_Direct)
 PointLight pointLight;
-#pragma unroll_loop
+#pragma unroll_loop_start
 for ( int i = 0; i < NUM_POINT_LIGHTS; i ++ ) {
   pointLight = pointLights[ i ];
   getPointLightInfo(pointLight, geometry, directLight);
@@ -21,11 +21,12 @@ for ( int i = 0; i < NUM_POINT_LIGHTS; i ++ ) {
   #endif
   RE_Direct( directLight, geometry, material, reflectedLight );
 }
+#pragma unroll_loop_end
 #endif
 
 #if (NUM_SPOT_LIGHTS > 0) && defined(RE_Direct)
 SpotLight spotLight;
-#pragma unroll_loop
+#pragma unroll_loop_start
 for ( int i = 0; i < NUM_SPOT_LIGHTS; i ++ ) {
   spotLight = spotLights[ i ];
   getSpotDirectLightIrradiance(spotLight, geometry, directLight);
@@ -34,12 +35,13 @@ for ( int i = 0; i < NUM_SPOT_LIGHTS; i ++ ) {
   #endif
   RE_Direct(directLight, geometry, material, reflectedLight);
 }
+#pragma unroll_loop_end
 #endif
 
 
 #if ( NUM_DIR_LIGHTS > 0 ) && defined( RE_Direct )
 DirectionalLight directionalLight;
-#pragma unroll_loop
+#pragma unroll_loop_start
 for ( int i = 0; i < NUM_DIR_LIGHTS; i ++ ) {
   directionalLight = directionalLights[ i ];
   getDirectionalLightInfo( directionalLight, geometry, directLight );
@@ -48,15 +50,17 @@ for ( int i = 0; i < NUM_DIR_LIGHTS; i ++ ) {
   #endif
   RE_Direct( directLight, geometry, material, reflectedLight );
 }
+#pragma unroll_loop_end
 #endif
 
 #if (NUM_RECT_AREA_LIGHTS > 0) && defined(RE_Direct_RectArea)
 RectAreaLight rectAreaLight;
-#pragma unroll_loop
+#pragma unroll_loop_start
 for ( int i = 0; i < NUM_RECT_AREA_LIGHTS; i ++ ) {
   rectAreaLight = rectAreaLights[ i ];
   RE_Direct_RectArea(rectAreaLight, geometry, material, reflectedLight);
 }
+#pragma unroll_loop_end
 #endif
 
 
@@ -65,10 +69,11 @@ vec3 iblIrradiance = vec3(0.0);
 vec3 irradiance = getAmbientLightIrradiance(ambientLightColor);
 irradiance += getLightProbeIrradiance(lightProbe, geometry.normal);
 #if (NUM_HEMI_LIGHTS > 0)
-#pragma unroll_loop
+#pragma unroll_loop_start
 for ( int i = 0; i < NUM_HEMI_LIGHTS; i ++ ) {
   irradiance += getHemisphereLightIrradiance(hemisphereLights[ i ], geometry);
 }
+#pragma unroll_loop_end
 #endif
 #endif
 

@@ -1,6 +1,6 @@
 {
   "name": "three-raymarch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Raymarching Plugin for three.js",
   "keywords": [
     "three",
@@ -40,7 +40,7 @@
     "webpack-cli": "^3.3.10"
   },
   "peerDependencies": {
-    "three": "^0.111.0"
+    "three": "^0.133.1"
   },
   "files": [
     "cjs",
